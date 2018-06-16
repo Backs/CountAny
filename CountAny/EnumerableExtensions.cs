@@ -23,9 +23,9 @@ namespace CountAny
                 return collection.Count != 0;
             }
 
-            if (source is ICollection readOnlyCollection)
+            if (source is ICollection baseCollection)
             {
-                return readOnlyCollection.Count != 0;
+                return baseCollection.Count != 0;
             }
 
             using (var enumerator = source.GetEnumerator())
