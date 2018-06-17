@@ -7,6 +7,7 @@ using BenchmarkDotNet.Configs;
 namespace CountAny
 {
     [CategoriesColumn]
+    [GroupBenchmarksBy(BenchmarkLogicalGroupRule.ByCategory)]
     public class SimpleCollections
     {
         [Params(1000)]
@@ -46,100 +47,100 @@ namespace CountAny
             }
         }
 
-        [Benchmark, BenchmarkCategory("Any")]
-        public void ListAny()
+        [Benchmark(Baseline = true, Description = "Any"), BenchmarkCategory("List")]
+        public bool ListAny()
         {
-            _list.Any();
+            return _list.Any();
         }
 
-        [Benchmark, BenchmarkCategory("Count")]
-        public void ListCount()
+        [Benchmark(Description = "Custom"), BenchmarkCategory("List")]
+        public bool ListCount()
         {
-            _list.CustomAny();
+            return _list.CustomAny();
         }
 
-        [Benchmark, BenchmarkCategory("Any")]
-        public void ArrayAny()
+        [Benchmark(Baseline = true, Description = "Any"), BenchmarkCategory("Array")]
+        public bool ArrayAny()
         {
-            _array.Any();
+            return _array.Any();
         }
 
-        [Benchmark, BenchmarkCategory("Count")]
-        public void ArrayCount()
+        [Benchmark(Description = "Custom"), BenchmarkCategory("Array")]
+        public bool ArrayCount()
         {
-            _array.CustomAny();
+            return _array.CustomAny();
         }
 
-        [Benchmark, BenchmarkCategory("Any")]
-        public void HashSetAny()
+        [Benchmark(Baseline = true, Description = "Any"), BenchmarkCategory("HashSet")]
+        public bool HashSetAny()
         {
-            _hashSet.Any();
+            return _hashSet.Any();
         }
 
-        [Benchmark, BenchmarkCategory("Count")]
-        public void HashSetCount()
+        [Benchmark(Description = "Custom"), BenchmarkCategory("HashSet")]
+        public bool HashSetCount()
         {
-            _hashSet.CustomAny();
+            return _hashSet.CustomAny();
         }
 
-        [Benchmark, BenchmarkCategory("Any")]
-        public void DictionaryAny()
+        [Benchmark(Baseline = true, Description = "Any"), BenchmarkCategory("Dictinary")]
+        public bool DictionaryAny()
         {
-            _dictionary.Any();
+            return _dictionary.Any();
         }
 
-        [Benchmark, BenchmarkCategory("Count")]
-        public void DictionaryCount()
+        [Benchmark(Description = "Custom"), BenchmarkCategory("Dictinary")]
+        public bool DictionaryCount()
         {
-            _dictionary.CustomAny();
+            return _dictionary.CustomAny();
         }
 
-        [Benchmark, BenchmarkCategory("Any")]
-        public void StackAny()
+        [Benchmark(Baseline = true, Description = "Any"), BenchmarkCategory("Stack")]
+        public bool StackAny()
         {
-            _stack.Any();
+            return _stack.Any();
         }
 
-        [Benchmark, BenchmarkCategory("Count")]
-        public void StackCount()
+        [Benchmark(Description = "Custom"), BenchmarkCategory("Stack")]
+        public bool StackCount()
         {
-            _stack.CustomAny();
+            return _stack.CustomAny();
         }
 
-        [Benchmark, BenchmarkCategory("Any")]
-        public void QueueAny()
+        [Benchmark(Baseline = true, Description = "Any"), BenchmarkCategory("Queue")]
+        public bool QueueAny()
         {
-            _queue.Any();
+            return _queue.Any();
         }
 
-        [Benchmark, BenchmarkCategory("Count")]
-        public void QueueCount()
+        [Benchmark(Description = "Custom"), BenchmarkCategory("Queue")]
+        public bool QueueCount()
         {
-            _queue.CustomAny();
+            return _queue.CustomAny();
         }
 
-        [Benchmark, BenchmarkCategory("Any")]
-        public void SortedListAny()
+        [Benchmark(Baseline = true, Description = "Any"), BenchmarkCategory("SortedList")]
+        public bool SortedListAny()
         {
-            _sortedList.Any();
+            return _sortedList.Any();
         }
 
-        [Benchmark, BenchmarkCategory("Count")]
-        public void SortedListCount()
+        [Benchmark(Description = "Custom"), BenchmarkCategory("SortedList")]
+        public bool SortedListCount()
         {
-            _sortedList.CustomAny();
+            return _sortedList.CustomAny();
         }
 
-        [Benchmark, BenchmarkCategory("Any")]
-        public void SortedSetAny()
+        [Benchmark(Baseline = true, Description = "Any"), BenchmarkCategory("SortedSet")]
+        public bool SortedSetAny()
         {
-            _sortedSet.Any();
+            return _sortedSet.Any();
         }
 
-        [Benchmark, BenchmarkCategory("Count")]
-        public void SortedSetCount()
+        [Benchmark(Description = "Custom"), BenchmarkCategory("SortedSet")]
+        public bool SortedSetCount()
         {
-            _sortedSet.CustomAny();
+            return _sortedSet.CustomAny();
         }
     }
 }

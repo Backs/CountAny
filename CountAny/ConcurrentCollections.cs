@@ -3,13 +3,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Attributes.Columns;
+using BenchmarkDotNet.Configs;
 
 namespace CountAny
 {
     [CategoriesColumn]
+    [GroupBenchmarksBy(BenchmarkLogicalGroupRule.ByCategory)]
     public class ConcurrentCollections
     {
-        [Params(10, 100, 1000, 10000)]
+        [Params(1000)]
         public int _size;
 
         private ConcurrentBag<int> _bag;
@@ -53,52 +55,52 @@ namespace CountAny
             Task.WaitAll(tasks);
         }
 
-        //[Benchmark, BenchmarkCategory("Any")]
-        //public void BagAny()
-        //{
-        //    _bag.Any();
-        //}
-
-        //[Benchmark, BenchmarkCategory("Count")]
-        //public void BagCount()
-        //{
-        //    _bag.CustomAny();
-        //}
-
-        [Benchmark, BenchmarkCategory("Any")]
-        public void DictionaryAny()
+        [Benchmark(Baseline = true, Description = "Any"), BenchmarkCategory("ConcurrentBag")]
+        public bool BagAny()
         {
-            _dictionary.Any();
+            return _bag.Any();
         }
 
-        [Benchmark, BenchmarkCategory("Count")]
-        public void DictionaryCount()
+        [Benchmark(Description = "Custom"), BenchmarkCategory("ConcurrentBag")]
+        public bool BagCount()
         {
-            _dictionary.CustomAny();
+            return _bag.CustomAny();
         }
 
-        //[Benchmark, BenchmarkCategory("Any")]
-        //public void StackAny()
-        //{
-        //    _stack.Any();
-        //}
+        [Benchmark(Baseline = true, Description = "Any"), BenchmarkCategory("ConcurrentDictionary")]
+        public bool DictionaryAny()
+        {
+            return _dictionary.Any();
+        }
 
-        //[Benchmark, BenchmarkCategory("Count")]
-        //public void StackCount()
-        //{
-        //    _stack.CustomAny();
-        //}
+        [Benchmark(Description = "Custom"), BenchmarkCategory("ConcurrentDictionary")]
+        public bool DictionaryCount()
+        {
+            return _dictionary.CustomAny();
+        }
 
-        //[Benchmark, BenchmarkCategory("Any")]
-        //public void QueueAny()
-        //{
-        //    _queue.Any();
-        //}
+        [Benchmark(Baseline = true, Description = "Any"), BenchmarkCategory("ConcurrentStack")]
+        public bool StackAny()
+        {
+            return _stack.Any();
+        }
 
-        //[Benchmark, BenchmarkCategory("Count")]
-        //public void QueueCount()
-        //{
-        //    _queue.CustomAny();
-        //}
+        [Benchmark(Description = "Custom"), BenchmarkCategory("ConcurrentStack")]
+        public bool StackCount()
+        {
+            return _stack.CustomAny();
+        }
+
+        [Benchmark(Baseline = true, Description = "Any"), BenchmarkCategory("ConcurrentQueue")]
+        public bool QueueAny()
+        {
+            return _queue.Any();
+        }
+
+        [Benchmark(Description = "Custom"), BenchmarkCategory("ConcurrentQueue")]
+        public bool QueueCount()
+        {
+            return _queue.CustomAny();
+        }
     }
 }

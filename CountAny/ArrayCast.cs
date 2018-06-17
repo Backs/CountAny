@@ -8,15 +8,15 @@ namespace CountAny
         private readonly int[] _array = new int[100];
 
         [Benchmark]
-        public void Cast()
+        public int Cast()
         {
-            var result = ((ICollection<int>)_array).Count;
+            return ((ICollection<int>)_array).Count;
         }
 
         [Benchmark]
-        public void Direct()
+        public int Direct()
         {
-            var result = _array.Length;
+            return _array.Length;
         }
     }
 }

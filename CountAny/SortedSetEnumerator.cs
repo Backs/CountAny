@@ -24,16 +24,16 @@ namespace CountAny
             }
         }
 
-        [Benchmark, BenchmarkCategory("Any")]
-        public void Any()
+        [Benchmark(Baseline = true)]
+        public bool Any()
         {
-            _sortedSet.Any();
+            return _sortedSet.Any();
         }
 
-        [Benchmark, BenchmarkCategory("Count")]
-        public void Count()
+        [Benchmark]
+        public bool Custom()
         {
-            _sortedSet.CustomAny();
+            return _sortedSet.CustomAny();
         }
     }
 }
